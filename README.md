@@ -2,6 +2,10 @@
 
 This is a place for me to understand and learning the whole machine learning process.
 
+<img width="468" alt="image" src="https://github.com/jasoncchandra/MachineLearningProcess/assets/141464490/bdc50859-f3bf-4d58-a3df-18059c158478">
+
+(from https://github.com/stefan-jansen/machine-learning-for-trading)
+
 ## Machine Learning Overview
 1.  **Problem Definition:**
     
@@ -44,14 +48,15 @@ This is a place for me to understand and learning the whole machine learning pro
     -   Analyze feature importances or coefficients to understand the factors influencing predictions.
 10.  **Model Deployment:**
 
-    -   Deploy the trained model to a production environment if applicable.
-    -   Implement a user interface or API for model interaction.
-    -   Monitor the model's performance in real-world scenarios.
+   -   Deploy the trained model to a production environment if applicable.
+   -   Implement a user interface or API for model interaction.
+   -   Monitor the model's performance in real-world scenarios.
+
 12.  **Documentation and Communication:**
     
-    -   Create comprehensive documentation outlining the entire process, from problem definition to deployment.
-    -   Communicate results and insights to stakeholders in a clear and understandable manner.
+   -   Create comprehensive documentation outlining the entire process, from problem definition to deployment.
+   -   Communicate results and insights to stakeholders in a clear and understandable manner.
 13.  **Iterate and Improve:**
     
-    -   Continuously monitor the model's performance and gather feedback.
-    -   Iterate on the process to refine the model and address any issues that arise.
+   -   Continuously monitor the model's performance and gather feedback.
+   -   Iterate on the process to refine the model and address any issues that arise.
