@@ -608,4 +608,38 @@ In practice, a combination of L1 and L2 regularization, known as Elastic Net reg
 
 ##  20. Describe Gradient Descent and the motivations behding Stochastic Gradient Descent.
 
+Gradient Descent (GD) is a fundamental optimization algorithm used in machine learning and numerical optimization to minimize a cost function. The primary motivation behind Gradient Descent is to find the minimum of a cost function, which typically represents the difference between the predicted and actual values (i.e., the error) in a machine learning model. Here's how GD works:
 
+Initialization: GD starts with an initial guess for the model's parameters (e.g., weights and biases).
+
+Iterative Updates: In each iteration, GD calculates the gradient of the cost function with respect to the model parameters. The gradient represents the direction and magnitude of the steepest ascent (increase) in the cost function.
+
+Parameter Update: GD adjusts the model's parameters in the opposite direction of the gradient to move closer to the minimum of the cost function. The update rule typically follows:
+
+θ_new = θ_old - learning_rate * gradient
+
+
+Here, θ_old represents the current parameter values, learning_rate is a hyperparameter that controls the step size, and gradient is the calculated gradient.
+
+Repeat: Steps 2 and 3 are repeated iteratively until a stopping criterion is met, such as a maximum number of iterations or achieving a small gradient magnitude.
+
+-SGD differs from traditional gradient descent by using a random subset (mini-batch) of the training data in each iteration to estimate the gradient. This stochastic nature introduces noise, which can lead to faster convergence and help escape local minima. SGD is particularly well-suited for large datasets and complex models, making it a popular choice for training deep neural networks. However, its performance may require tuning of hyperparameters like the learning rate, and it is more sensitive to data preprocessing and initialization, but it remains a key optimization method in modern machine learning.
+
+
+##  21. If we have a classifier that produces a score between 0 and 1 for the probability of a loan application as fraud. For each application's score we take the square root of that score. How would the ROC curve change? If it doesn't change, what kinds of function would change the curve?
+
+The Receiver Operating Characteristic (ROC) curve is primarily used to evaluate the performance of binary classifiers across different discrimination thresholds. The square root transformation of the classifier's scores, ranging from 0 to 1, will affect the ROC curve by changing the threshold at which you classify instances as positive or negative, but it won't fundamentally change the curve's shape.
+
+![image](https://github.com/jasoncchandra/MachineLearningProcess/assets/141464490/9e0c4d49-86cf-475b-a6f3-fdbf51550e79)
+
+![image](https://github.com/jasoncchandra/MachineLearningProcess/assets/141464490/cad10aea-2124-4fd6-945f-8dd4093ef324)
+
+Here's how it works:
+
+Original ROC Curve: In the original ROC curve, you vary the classification threshold from 0 to 1 to calculate true positive rates (TPR) and false positive rates (FPR) at different threshold levels. The curve illustrates the trade-off between TPR and FPR as you change the threshold.
+
+Transformed Scores: When you take the square root of the classifier's scores, you effectively create a new set of transformed scores ranging from 0 to 1, but these transformed scores are still monotonically increasing with respect to the original scores. In other words, the relative ordering of instances based on their fraud probability remains the same.
+
+Effect on ROC Curve: The ROC curve will still depict the trade-off between TPR and FPR, but the specific values of TPR and FPR at different thresholds will change due to the transformation. The overall shape of the ROC curve, with its upward slope, will remain the same.
+
+To fundamentally change the shape of the ROC curve, you would need to introduce a non-monotonic transformation or change the underlying classification algorithm significantly. Common ways to affect the ROC curve include altering the classifier's parameters, changing the feature set, or modifying the classification algorithm itself. These changes can lead to shifts in the trade-off between TPR and FPR and potentially result in different ROC curves.
