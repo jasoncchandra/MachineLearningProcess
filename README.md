@@ -38,7 +38,7 @@ I have also attached [Sample Interview Questions](MLInterviewQuestions.md) for F
     -   Transform categorical variables into numerical representations.
     -   Normalize or standardize numerical features.
 4.  **Feature Engineering:**
-    
+    -   Feature engineering in ML consists of four main steps: **Feature Creation, Transformations, Feature Extraction, and Feature Selection.**
     -   Select relevant features that contribute to the model's predictive power.
     -   Create new features that capture important patterns or relationships.
     -   Perform dimensionality reduction if necessary.
