@@ -748,3 +748,403 @@ Cons:
 Less interpretable than a single decision tree due to the ensemble nature.
 Can be computationally expensive, especially with a large number of trees.
 May still be prone to bias if the dataset is imbalanced, although it's less affected than individual trees.
+
+
+## 24. Compare and contrast GNB and Logistic Regression, what are pros and cons
+
+**Gaussian Naive Bayes (GNB)** and **Logistic Regression** are two commonly used classification algorithms in machine learning, each with its own set of strengths and weaknesses. Here's a comparison of the two, including their pros and cons:
+
+**Gaussian Naive Bayes (GNB):**
+GNB is a probabilistic classification algorithm.
+It's based on Bayes' theorem and makes an independence assumption between features (hence "naive").
+Suitable for both binary and multiclass classification tasks.
+Particularly effective for text classification and spam email detection.
+Provides class probabilities as output.
+
+- **Pros:**
+  1. **Simple and Fast:** GNB is a simple and computationally efficient algorithm, making it suitable for large datasets.
+  2. **Low Data Requirement:** It can work well with a small amount of training data.
+  3. **Handles High-Dimensional Data:** GNB performs surprisingly well in high-dimensional spaces, such as text classification tasks.
+  4. **Probabilistic Output:** GNB provides class probabilities, which can be useful for ranking predictions and understanding uncertainty.
+  5. **Handles Categorical Data:** It can naturally handle categorical features without the need for one-hot encoding.
+
+- **Cons:**
+  1. **Naive Assumption:** GNB assumes that features are conditionally independent, which may not hold in real-world data. This simplification can lead to suboptimal results.
+  2. **Limited Expressiveness:** GNB may not capture complex relationships between features as effectively as other algorithms.
+  3. **Sensitive to Feature Scaling:** GNB's performance can be influenced by the scaling of continuous features.
+
+**Logistic Regression:**
+
+Logistic Regression is a statistical model used for binary classification tasks.
+It models the relationship between the features and the probability of a binary outcome.
+Provides interpretable results, with coefficients indicating feature importance.
+Can be extended to multiclass classification using techniques like one-vs-all.
+Works well when relationships between features are not assumed to be independent.
+
+- **Pros:**
+  1. **Interpretability:** Logistic Regression provides interpretable results, as the coefficients can be directly linked to the impact of features on the prediction.
+  2. **No Assumption of Independence:** Unlike GNB, Logistic Regression does not assume feature independence, making it more suitable for correlated data.
+  3. **Flexible Thresholding:** You can easily adjust the decision threshold to control precision and recall trade-offs.
+  4. **Well-Suited for Binary Classification:** Logistic Regression is a natural choice for binary classification problems.
+
+- **Cons:**
+  1. **Linear Decision Boundary:** Logistic Regression models assume a linear decision boundary, which may limit their ability to capture complex, nonlinear relationships in the data.
+  2. **Susceptible to Outliers:** Logistic Regression can be sensitive to outliers, as it minimizes the logistic loss function.
+  3. **Limited for Multiclass Problems:** While it can be extended to multiclass classification, Logistic Regression may not perform as well as other methods like Random Forests or Gradient Boosting for such tasks.
+
+In summary, GNB is a simple and fast algorithm suitable for cases where the independence assumption holds reasonably well, especially for text classification. Logistic Regression is a versatile algorithm with strong interpretability, making it a good choice for binary classification problems when the relationships between features are more complex. The choice between the two depends on the nature of the data and the trade-offs between interpretability, performance, and modeling assumptions.
+
+
+
+## 25. What loss function is used in k-means clustering given K clusters and n sample points? What about in batch gradient descent and stochastic gradient descent
+
+- recap, this is k-means clustering. Not k-cross validation. K-means clustering is a form of unsupervised learning, uses elbow method (see Q3), etc.
+
+But -- this is the answer to the LOSS FUNCTIONS: 
+
+In K-means clustering, the primary objective is to minimize the within-cluster sum of squares, which is also known as the **inertia** or **distortion**. The loss function used in K-means clustering is the sum of the squared Euclidean distances between each data point and the centroid of the cluster it belongs to. Given K clusters and n sample points, the loss function for K-means clustering can be written as:
+
+```
+Loss = Σ (distance(data_point_i, centroid_cluster_i))^2
+```
+
+Where:
+- `data_point_i` is a data point.
+- `centroid_cluster_i` is the centroid of the cluster to which `data_point_i` belongs.
+- The summation Σ is taken over all data points.
+
+The objective in K-means clustering is to find cluster assignments and centroids that minimize this loss function.
+
+Now, when it comes to optimization algorithms like batch gradient descent and stochastic gradient descent (SGD), they are typically not used directly in traditional K-means clustering because K-means does not involve optimizing a differentiable loss function. K-means uses an iterative approach that directly updates cluster assignments and centroids based on distance computations. It does not involve gradient-based optimization.
+
+Instead, K-means employs an algorithm called the **Expectation-Maximization (EM) algorithm** or its variant called the **Lloyd's algorithm** to iteratively update cluster assignments and centroids. These algorithms do not rely on gradient descent or loss functions in the same way that supervised learning algorithms do.
+
+In summary, K-means clustering uses the inertia or within-cluster sum of squares as a loss function to minimize during clustering, but it does not directly employ batch gradient descent or stochastic gradient descent for optimization. Instead, it uses specialized algorithms designed for clustering tasks, such as the EM or Lloyd's algorithm.
+
+
+## 26. Describe the kernel trick in SVMs and give a simple example. How do you describe what kernel to choose? In your answer define SVM, Kernels
+
+**Support Vector Machine (SVM)** is a powerful supervised machine learning algorithm used for both classification and regression tasks. The fundamental idea behind SVM is to find a hyperplane that best separates data points into different classes while maximizing the margin between the classes. However, in some cases, data may not be linearly separable in the feature space, which is where the "kernel trick" comes into play.
+
+**Kernels in SVM:**
+In SVM, a kernel is a mathematical function that implicitly maps data points into a higher-dimensional space where they can become linearly separable. The kernel trick allows SVM to find complex decision boundaries in the original feature space without explicitly transforming the data into that higher-dimensional space. This is computationally efficient and avoids the need to calculate the transformation explicitly.
+
+**Choosing the Right Kernel:**
+Choosing the appropriate kernel for your SVM depends on the nature of your data and the problem you're trying to solve. Different kernels capture different types of relationships between data points. Here are a few common kernels and when to use them:
+
+1. **Linear Kernel (no kernel):**
+   - Use when your data is linearly separable in the original feature space.
+   - It's computationally efficient and often a good starting point.
+
+2. **Polynomial Kernel:**
+   - Use when the decision boundary is polynomial.
+   - Choose the degree of the polynomial (e.g., quadratic, cubic) based on the complexity of your data.
+
+3. **Radial Basis Function (RBF) Kernel:**
+   - Use when the decision boundary is non-linear and doesn't follow a specific polynomial pattern.
+   - RBF kernel is versatile and can capture complex patterns.
+
+4. **Sigmoid Kernel:**
+   - Use when the decision boundary has a sigmoid shape.
+   - It's less common compared to linear, polynomial, and RBF kernels.
+
+**Simple Example:**
+Imagine you have a binary classification problem with two classes, represented by red and blue points on a 2D plane. In the original feature space, the data is not linearly separable (i.e., no straight line can separate the classes). You decide to use the RBF kernel, which maps the data to a higher-dimensional space.
+
+The RBF kernel's decision boundary in this higher-dimensional space takes the form of a curved surface that effectively separates the red and blue points. This complex boundary is achieved without explicitly transforming the data into the higher-dimensional space, thanks to the kernel trick.
+
+Choosing the right kernel often involves experimentation and cross-validation to determine which kernel yields the best performance for your specific dataset and classification problem.
+
+## 27. Say we have N observations for some variable which we model as drawn from a Gaussian distribution. What are the best guesses for the parameters of the distribution?
+
+The likelihood function is a fundamental concept in statistics and probability theory. It represents the probability of observing a set of data points, given a particular statistical model and a set of model parameters. In simple terms, the likelihood function quantifies how well the model explains the observed data.
+
+You can estimate the parameters of a Gaussian distribution (mean and variance) by maximizing the likelihood function or, equivalently, the log-likelihood function. Here's how you can do it:
+
+**Likelihood Function for Gaussian Distribution:**
+The likelihood function for N observations (x_1, x_2, ..., x_N) assumed to be drawn from a Gaussian distribution with unknown mean (μ) and variance (σ²) is given by:
+
+```
+L(μ, σ² | x_1, x_2, ..., x_N) = Π [1 / (σ * √(2π))] * exp[-(x_i - μ)² / (2σ²)]
+```
+
+Where:
+- L(μ, σ² | x_1, x_2, ..., x_N) is the likelihood function.
+- μ is the mean.
+- σ² is the variance.
+- x_i represents each individual observation.
+- Π denotes the product over all observations.
+
+**Log-Likelihood Function:**
+Taking the natural logarithm of the likelihood function simplifies calculations, as the product becomes a sum:
+
+```
+log(L(μ, σ² | x_1, x_2, ..., x_N)) = -N/2 * log(2π) - N/2 * log(σ²) - Σ (x_i - μ)² / (2σ²)
+```
+
+Now, to estimate the parameters (μ and σ²), you can maximize this log-likelihood function with respect to μ and σ². The estimates that maximize the log-likelihood are the maximum likelihood estimators (MLEs) for the mean (μ) and variance (σ²).
+
+**Maximum Likelihood Estimates (MLEs):**
+- The MLE for the mean (μ) is the sample mean (x̄), as it maximizes the likelihood when the derivative of the log-likelihood function with respect to μ is set to zero.
+- The MLE for the variance (σ²) is the sample variance (s²), as it maximizes the likelihood when the derivative of the log-likelihood function with respect to σ² is set to zero.
+
+So, the best estimates for the parameters of the Gaussian distribution are:
+- μ (mean) = x̄ (sample mean)
+- σ² (variance) = s² (sample variance)
+
+These MLEs maximize the likelihood of observing the given data under the assumed Gaussian distribution, and they are commonly used in practice for parameter estimation.
+
+## 28. SUPER HARD> IDK if you NEED TO DO! Say you are using a Gaussian mixture model for anomaly detection of fraud transactions to classify incoming transactions into K classes. Describe the model setup formulaically and evaluate the posterior probabilities and log likelihood. How do we know if something is fraudulent?
+
+A Gaussian Mixture Model (GMM) is a probabilistic model used in machine learning and statistics for modeling complex data distributions. It is particularly useful for modeling data that appears to be a mixture of multiple Gaussian (normal) distributions. GMMs are widely employed for various tasks, including clustering, density estimation, and anomaly detection.
+
+
+Using a Gaussian Mixture Model (GMM) for anomaly detection in fraud transactions involves modeling the data as a mixture of K Gaussian distributions, where K is the number of components or clusters. The goal is to classify incoming transactions and detect anomalies (fraudulent transactions) based on the posterior probabilities and log likelihood. Here's the setup and evaluation:
+
+**Model Setup:**
+
+1. **Assumptions:**
+   - We assume that the data consists of N transactions, each with D-dimensional features (e.g., transaction amount, time, etc.).
+   - We assume that the data is a mixture of K Gaussian distributions, where each Gaussian represents a cluster of transactions. This models the normal behavior of legitimate transactions.
+
+2. **Parameters:**
+   - The model parameters include:
+     - K: The number of Gaussian components or clusters.
+     - Mixing Coefficients (π): The probabilities that a data point belongs to each cluster, with Σ(π_i) = 1 for i = 1 to K.
+     - Cluster Parameters (μ and Σ): The mean (μ) and covariance (Σ) for each Gaussian component.
+
+3. **Modeling:**
+   - The likelihood of observing a data point x given the Gaussian Mixture Model is:
+     ```
+     P(x | θ) = Σ [π_i * N(x | μ_i, Σ_i)] for i = 1 to K
+     ```
+     where N(x | μ_i, Σ_i) is the probability density function (PDF) of a multivariate Gaussian distribution with mean μ_i and covariance Σ_i.
+
+**Evaluation:**
+
+To classify an incoming transaction as fraudulent or not, you typically perform the following steps:
+
+1. **Estimation:**
+   - Use the Expectation-Maximization (EM) algorithm to estimate the model parameters (π, μ, and Σ) from your training data.
+
+2. **Inference:**
+   - Given an incoming transaction x, calculate the posterior probabilities of it belonging to each cluster using Bayes' theorem:
+     ```
+     P(cluster_i | x) = (π_i * N(x | μ_i, Σ_i)) / Σ [π_j * N(x | μ_j, Σ_j)] for j = 1 to K
+     ```
+   - These posterior probabilities represent the likelihood that the transaction belongs to each cluster.
+
+3. **Thresholding:**
+   - Define a decision threshold or anomaly score. For example, you might consider transactions with a low posterior probability (below a certain threshold) as potential anomalies or fraudulent.
+
+4. **Fraud Detection:**
+   - If the posterior probability of the most likely cluster (i.e., the cluster with the highest P(cluster_i | x)) is below the threshold, classify the transaction as fraudulent. Otherwise, classify it as legitimate.
+
+**Anomaly Detection:**
+- Transactions with posterior probabilities below the threshold are considered anomalies because they have a low likelihood of belonging to any of the normal behavior clusters.
+- The choice of the threshold is crucial and often involves a trade-off between false positives and false negatives. Adjusting the threshold can impact the model's performance in detecting fraud.
+
+By setting an appropriate threshold and using the posterior probabilities obtained from the GMM, you can identify and classify incoming transactions as either legitimate or potentially fraudulent based on their deviations from the learned normal behavior.
+
+## 29. Churning predictor?
+
+Churning, in a business context, refers to the phenomenon where customers or subscribers stop using a company's products or services and switch to those of a competitor or simply discontinue using any such services altogether. Churning is also known as customer attrition or customer turnover.
+
+Building a model to predict which users are likely to churn is a common approach used by companies to proactively address customer attrition. This predictive modeling process typically involves the following steps:
+
+1. **Data Collection:**
+   - Gather historical data related to customer behavior and interactions. This data may include user demographics, usage patterns, transaction history, customer support interactions, and any other relevant information.
+
+2. **Data Preprocessing:**
+   - Clean and preprocess the data. This involves handling missing values, encoding categorical variables, and scaling or normalizing numerical features.
+
+3. **Feature Engineering:**
+   - Create relevant features that can be used to predict churn. For example, you might calculate metrics like customer lifetime value, frequency of product usage, or customer satisfaction scores.
+
+4. **Labeling:**
+   - Define a churn event. This could be a specific action or inaction by the customer that indicates churn, such as canceling a subscription or not using the service for a certain period.
+
+5. **Splitting Data:**
+   - Divide the dataset into training and testing sets. The training set is used to train the predictive model, while the testing set is used to evaluate its performance.
+
+6. **Model Selection:**
+   - Choose an appropriate machine learning model for churn prediction. Common models include logistic regression, decision trees, random forests, support vector machines, and gradient boosting algorithms like XGBoost or LightGBM.
+
+7. **Training and Validation:**
+   - Train the model on the training dataset and validate its performance on the testing dataset. Employ techniques like cross-validation to fine-tune hyperparameters and ensure robust model performance.
+
+8. **Evaluation Metrics:**
+   - Select evaluation metrics to assess the model's performance. Common metrics for churn prediction include accuracy, precision, recall, F1-score, ROC AUC, and lift curves.
+
+9. **Feature Importance Analysis:**
+   - Analyze feature importance to understand which customer behaviors or characteristics are most influential in predicting churn. This can help identify areas for targeted intervention.
+
+10. **Deployment:**
+    - Once the model is trained and validated, deploy it to make real-time predictions. Integration with a customer management system or marketing automation platform allows for timely intervention.
+
+11. **Monitoring and Feedback Loop:**
+    - Continuously monitor the model's performance in production. Collect feedback on model predictions and use this feedback to improve the model over time.
+
+12. **Intervention Strategies:**
+    - Develop and implement strategies to retain at-risk customers. This might involve personalized marketing campaigns, special offers, or proactive customer support.
+
+Predictive modeling for churn can be a valuable tool for businesses, enabling them to identify potential churners early and take proactive steps to retain customers, ultimately improving customer satisfaction and business profitability.
+
+## 30. OLS Derivation:
+
+In linear regression, the goal is to find the best-fitting linear relationship between a dependent variable (often denoted as "Y") and one or more independent variables (often denoted as "X"). The error term, also known as the residual, represents the difference between the observed values (Y) and the values predicted by the linear model. Assuming the error term follows a normal distribution, the objective is to minimize the sum of squared residuals (the least squares criterion) to find the optimal model parameters.
+
+Here's the mathematical representation of this minimization process:
+
+**1. Model Representation:**
+In linear regression, the model can be expressed as:
+
+```
+Y = β0 + β1*X1 + β2*X2 + ... + βn*Xn + ε
+```
+
+- Y: Dependent variable (the observed values).
+- β0, β1, β2, ..., βn: Model coefficients to be estimated.
+- X1, X2, ..., Xn: Independent variables (features).
+- ε (epsilon): Error term representing the deviations between observed and predicted values.
+
+**2. Objective Function:**
+The objective is to minimize the sum of squared residuals, which is the sum of the squares of the errors (ε):
+
+```
+Minimize: Σ(ε²) = Σ(Y - β0 - β1*X1 - β2*X2 - ... - βn*Xn)²
+```
+
+**3. Minimization Process:**
+To find the optimal model coefficients (β0, β1, β2, ..., βn) that minimize the sum of squared residuals, you typically use a method like Ordinary Least Squares (OLS). OLS finds the values of β0, β1, β2, ..., βn that minimize the objective function above.
+
+**4. Solving for Optimal Coefficients:**
+The optimal coefficients can be found by taking the derivatives of the objective function with respect to each coefficient and setting them to zero. The resulting system of equations is then solved to obtain the coefficients:
+
+```
+∂(Σ(ε²))/∂β0 = 0
+∂(Σ(ε²))/∂β1 = 0
+∂(Σ(ε²))/∂β2 = 0
+...
+∂(Σ(ε²))/∂βn = 0
+```
+
+Solving this system of equations provides the values of β0, β1, β2, ..., βn that minimize the sum of squared residuals, effectively fitting the linear model to the data.
+
+The assumption of normally distributed errors (ε) is often made in linear regression to justify the use of the least squares method. When this assumption holds, the OLS estimates of the coefficients are also maximum likelihood estimates (MLEs) under normality assumptions.
+
+## 31. PCA Derivation in matrix form too (HARD AF)
+
+**Principal Component Analysis (PCA)** is a dimensionality reduction technique commonly used in data analysis and machine learning. It aims to transform a dataset into a new coordinate system where the data's variance is maximized along the principal axes, known as principal components. PCA is also used for data compression, feature extraction, and noise reduction.
+
+Here's a detailed description of PCA along with the formulation and derivation in matrix form:
+
+**PCA Formulation:**
+
+1. **Data Matrix:** Let's assume you have a dataset represented by a data matrix **X**, where each row corresponds to an observation (data point), and each column represents a feature (variable).
+
+2. **Centering:** Start by centering the data by subtracting the mean of each feature from the respective feature values. This step ensures that the new coordinate system is centered at the origin.
+
+   Centered Data Matrix: **X_centered** = **X** - **μ**, where **μ** is the mean vector of the original data.
+
+3. **Covariance Matrix:** Calculate the covariance matrix **C** of the centered data:
+
+   **C** = (1/N) * **X_centered^T** * **X_centered**, where N is the number of data points.
+
+4. **Eigenvalue Decomposition:** Perform an eigenvalue decomposition of the covariance matrix **C**:
+
+   **C** = **V** * **Λ** * **V^T**, where:
+   - **V** is a matrix whose columns are the eigenvectors of **C** (principal components).
+   - **Λ** is a diagonal matrix containing the eigenvalues of **C**.
+
+5. **Selecting Principal Components:** Sort the eigenvalues in descending order. The eigenvectors corresponding to the largest eigenvalues represent the principal components that capture the most variance in the data.
+
+**Derivation in Matrix Form:**
+
+1. **Objective Function:** PCA aims to maximize the variance of the data projected onto a lower-dimensional space defined by the principal components. The k-dimensional projection is given by:
+
+   **Y_k** = **X_centered** * **W_k**,
+
+   where **W_k** is a matrix containing the first k principal components as its columns.
+
+2. **Variance Maximization:** The objective is to maximize the variance of the projected data **Y_k**. This can be expressed as:
+
+   Maximize: Var(**Y_k**) = Var(**X_centered** * **W_k**)
+
+3. **Constrained Maximization:** Subject to the constraint that **W_k** is orthonormal (i.e., the columns of **W_k** are orthogonal unit vectors):
+
+   **W_k^T** * **W_k** = **I_k**, where **I_k** is the k-dimensional identity matrix.
+
+4. **Lagrange Multiplier Approach:** To solve the constrained maximization problem, introduce a Lagrange multiplier λ and formulate the Lagrangian as follows:
+
+   L(**W_k**, λ) = Var(**X_centered** * **W_k**) - λ * (**W_k^T** * **W_k** - **I_k**)
+
+5. **Partial Derivatives:** Take the partial derivatives of L with respect to **W_k** and λ and set them equal to zero to find the critical points:
+
+   - ∂L/∂**W_k** = 0
+   - ∂L/∂λ = 0
+
+6. **Solve for Eigenvectors:** Solving these equations leads to the solution where the columns of **W_k** are the eigenvectors of the covariance matrix **C**.
+
+7. **Eigenvalue Interpretation:** The eigenvalues of **C** represent the variance captured by each principal component. The k principal components corresponding to the k largest eigenvalues capture the maximum variance in the data.
+
+In summary, PCA seeks to maximize the variance of data projections while ensuring that the projection vectors (principal components) are orthonormal. This optimization problem is solved using Lagrange multipliers, leading to the eigenvalue decomposition of the covariance matrix and the selection of principal components that capture the most variance.
+
+
+## 32. Logistic Regression formulation + log-likelihood
+
+**Logistic Regression** is a statistical model used for binary classification. It models the probability that a given input belongs to a particular class. The logistic regression model is formulated as follows:
+
+**Model Formulation:**
+
+1. **Binary Classification:** In logistic regression, we typically have a binary response variable (also called the dependent variable) denoted as Y, which takes values 0 or 1, representing two classes.
+
+2. **Linear Combination:** The linear regression model starts with a linear combination of the predictor variables (independent variables) denoted as X_1, X_2, ..., X_p, with corresponding coefficients β_1, β_2, ..., β_p:
+
+   ```
+   z = β_0 + β_1 * X_1 + β_2 * X_2 + ... + β_p * X_p
+   ```
+
+   Here, z is the linear combination.
+
+3. **Logistic Transformation:** The linear combination z is transformed using the logistic function (also called the sigmoid function) to produce the estimated probability of the positive class (class 1):
+
+   ```
+   P(Y = 1 | X) = 1 / (1 + exp(-z))
+   ```
+
+   Here, exp() represents the exponential function.
+
+4. **Log-Odds Transformation:** The log-odds (logit) transformation of the probability is often used to make the relationship linear with respect to the predictor variables:
+
+   ```
+   log(P(Y = 1 | X) / (1 - P(Y = 1 | X))) = z
+   ```
+
+   This equation represents the logistic regression model. The left-hand side is the log-odds of the probability that Y is equal to 1 given the predictor variables X.
+
+**Maximizing Log-Likelihood:**
+
+The logistic regression model is trained by estimating the model parameters (coefficients β_0, β_1, β_2, ..., β_p) that maximize the log-likelihood of the observed data. Here's how this is done:
+
+1. **Likelihood Function:** The likelihood function represents the probability of observing the given binary outcomes (0s and 1s) given the model parameters. It can be expressed as:
+
+   ```
+   L(β_0, β_1, β_2, ..., β_p) = Π [P(Y_i = 1 | X_i)^Y_i * (1 - P(Y_i = 1 | X_i))^(1 - Y_i)]
+   ```
+
+   Here, the product Π is taken over all observations (i = 1 to N), and Y_i represents the observed class labels (0 or 1) for each observation X_i.
+
+2. **Log-Likelihood:** To simplify calculations, we often work with the log-likelihood, which is the natural logarithm of the likelihood:
+
+   ```
+   LL(β_0, β_1, β_2, ..., β_p) = Σ [Y_i * log(P(Y_i = 1 | X_i)) + (1 - Y_i) * log(1 - P(Y_i = 1 | X_i))]
+   ```
+
+   Here, the sum Σ is taken over all observations (i = 1 to N).
+
+3. **Maximum Likelihood Estimation (MLE):** The goal is to find the values of β_0, β_1, β_2, ..., β_p that maximize the log-likelihood function. This is typically done using optimization techniques, such as gradient descent or Newton-Raphson.
+
+4. **Regularization (Optional):** In practice, regularization techniques like L1 (Lasso) or L2 (Ridge) regularization may be applied to prevent overfitting and improve the model's generalization performance. These methods introduce penalty terms into the likelihood function.
+
+The logistic regression model parameters (coefficients) that maximize the log-likelihood are the estimated values that best describe the relationship between the predictor variables and the probability of the positive class. The model is then used to make predictions by applying the logistic transformation to new data points.
