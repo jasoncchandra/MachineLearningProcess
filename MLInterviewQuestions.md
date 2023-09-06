@@ -644,3 +644,107 @@ Transformed Scores: When you take the square root of the classifier's scores, yo
 Effect on ROC Curve: The ROC curve will still depict the trade-off between TPR and FPR, but the specific values of TPR and FPR at different thresholds will change due to the transformation. The overall shape of the ROC curve, with its upward slope, will remain the same.
 
 To fundamentally change the shape of the ROC curve, you would need to introduce a non-monotonic transformation or change the underlying classification algorithm significantly. Common ways to affect the ROC curve include altering the classifier's parameters, changing the feature set, or modifying the classification algorithm itself. These changes can lead to shifts in the trade-off between TPR and FPR and potentially result in different ROC curves.
+
+
+##  22. Say X is a univariate gaussian random variable. what is the entropy of X
+
+The entropy of a continuous random variable, such as a univariate Gaussian random variable X, can be calculated using the probability density function (PDF) of the variable. For a Gaussian random variable with mean μ and standard deviation σ, the PDF is given by:
+
+f(x) = (1 / (σ√(2π))) * exp(-(x - μ)^2 / (2σ^2))
+
+H(X) = -∫[f(x) * log(f(x))] dx
+
+You can evaulate it with bounds infinity to -infinity and get:
+
+H(X) = (1/2) + log σ SQRT(2pi)
+
+
+## 23. How would you build a model to calculate a customer's propensity to buy an item?
+
+High level overview:
+
+Building a model to calculate a customer's propensity to buy a particular item involves several steps in the data science and machine learning process. Here's a high-level overview of the process:
+
+Certainly, let's create a more specific example for building a model to calculate a customer's propensity to buy a particular item, such as a high-end smartphone:
+
+1. **Data Collection:**
+   - Gather data about your customers, including demographics (age, gender, location), past purchase history (items bought, purchase dates, purchase amounts), website behavior (pages visited, time spent), and any other relevant information.
+
+2. **Data Preprocessing:**
+   - Clean the data, handle missing values, and format inconsistencies.
+   - Engineer features like the customer's average spending, frequency of visits, and recency of the last purchase.
+
+3. **Feature Selection:**
+   - Select features that are likely to influence a customer's propensity to buy a high-end smartphone. These might include age, income, past purchases of similar products, and recent website visits to smartphone product pages.
+
+4. **Data Splitting:**
+   - Split your dataset into training, validation, and test sets. For example, use 70% of the data for training, 15% for validation, and 15% for testing.
+
+5. **Model Selection:**
+   - Choose an appropriate model. For this binary classification problem (buy or not buy), you might start with logistic regression, a decision tree, or a random forest.
+
+6. **Model Training:**
+   - Train the selected model on the training data using the chosen features. The model will learn to predict whether a customer is likely to buy a high-end smartphone.
+
+7. **Hyperparameter Tuning:**
+   - Optimize the model's hyperparameters using the validation set. For instance, you can tune the regularization strength in logistic regression or the maximum depth in decision trees.
+
+8. **Model Evaluation:**
+   - Evaluate the model's performance on the test set. Calculate metrics like accuracy, precision, recall, and F1-score. You might want to achieve a high precision to minimize false positives (e.g., offering a smartphone to customers unlikely to buy).
+
+9. **Deployment:**
+   - Deploy the model in your e-commerce platform. It can provide real-time predictions as customers interact with your website or make purchase decisions.
+
+10. **Monitoring and Maintenance:**
+    - Continuously monitor the model's performance in production. Reassess and retrain the model as needed, especially when introducing new smartphone models or changes to your website.
+
+11. **Interpretability and Explainability:**
+    - Explain the model's predictions to stakeholders by highlighting important features that influence a customer's propensity to buy a smartphone. This can help marketing teams tailor their strategies.
+
+12. **Feedback Loop:**
+    - Collect feedback from customers and sales data. Use this feedback to improve the model and refine your marketing efforts, customer targeting, and product recommendations.
+
+Building a customer propensity model is an iterative process that requires a combination of domain knowledge, data engineering, and machine learning expertise to create a model that accurately predicts customer behavior.
+
+** to ADD:
+
+Logistic Regression:
+
+Pros:
+
+Simple and interpretable. Coefficients can indicate the impact of each feature on the propensity to buy.
+Computationally efficient and fast to train on large datasets.
+Works well when there's a linear or close-to-linear relationship between features and the target.
+Cons:
+
+Assumes a linear relationship, which may not capture complex interactions between features.
+May not perform as well as more complex models when there are nonlinear relationships in the data.
+Sensitive to outliers.
+
+
+Decision Trees:
+
+Pros:
+
+Highly interpretable, as you can visualize the tree structure and understand the decision-making process.
+Can capture complex, nonlinear relationships between features.
+Handles both numerical and categorical data without the need for extensive preprocessing.
+Cons:
+
+Prone to overfitting, especially on small datasets or deep trees. Pruning is often required.
+May create biased trees if certain classes are dominant in the data, requiring class balancing techniques.
+Trees can be unstable, meaning small changes in data can lead to different tree structures.
+
+
+Random Forests (Ensemble of Decision Trees):
+
+Pros:
+
+Combines the strengths of decision trees with improved generalization and reduced overfitting.
+Handles high-dimensional data and can deal with feature importance estimation.
+Provides robust predictions by aggregating multiple decision trees.
+Cons:
+
+Less interpretable than a single decision tree due to the ensemble nature.
+Can be computationally expensive, especially with a large number of trees.
+May still be prone to bias if the dataset is imbalanced, although it's less affected than individual trees.
