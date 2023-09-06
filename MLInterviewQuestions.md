@@ -632,7 +632,8 @@ The Receiver Operating Characteristic (ROC) curve is primarily used to evaluate 
 
 ![image](https://github.com/jasoncchandra/MachineLearningProcess/assets/141464490/9e0c4d49-86cf-475b-a6f3-fdbf51550e79)
 
-![image](https://github.com/jasoncchandra/MachineLearningProcess/assets/141464490/cad10aea-2124-4fd6-945f-8dd4093ef324)
+![image](https://github.com/jasoncchandra/MachineLearningProcess/assets/141464490/cbeaea39-a8d7-4e73-8342-631e6a51be03)
+
 
 Here's how it works:
 
