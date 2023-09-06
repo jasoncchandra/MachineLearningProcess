@@ -2,9 +2,9 @@
 
 This is a place for me to understand and learning the whole machine learning process.
 
-I have attached **Concepts** for me to read all of the important concepts.
+I have attached [Concepts](ML Concepts.mdx)for me to read all of the important concepts.
 
-I have also attached **General ML Questions** for FAQs in interviews.
+I have also attached [Sample Interview Questions](MLInterviewQuestions.mdx) for FAQs in interviews.
 
 
 <img width="468" alt="image" src="https://github.com/jasoncchandra/MachineLearningProcess/assets/141464490/bdc50859-f3bf-4d58-a3df-18059c158478">
