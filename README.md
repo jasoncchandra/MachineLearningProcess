@@ -2,7 +2,7 @@
 
 This is a place for me to understand and learning the whole machine learning process.
 
-I have attached [Concepts](ML Concepts.md)for me to read all of the important concepts.
+I have attached [Concepts](MLConcepts.md)for me to read all of the important concepts.
 
 I have also attached [Sample Interview Questions](MLInterviewQuestions.md) for FAQs in interviews.
 
